@@ -32,6 +32,21 @@
   }
 }
 
+@media (max-width:280px) {/*para galaxy fold*/
+  h1{
+    width: 80%;
+    text-align: right;
+  }
+  #texto-carrusel {
+    width: 80%;
+    text-align: right;
+  }
+
+  .carousel-caption{
+    padding-bottom: 25rem;
+  }
+}
+
 
 @media (max-height: 600px) {
   h1{
@@ -42,7 +57,7 @@
 
   .carousel-caption {
     width: 80%;
-    padding-bottom: 40rem;
+    padding-bottom: 33rem;
   }
 }
 
@@ -55,7 +70,6 @@
 
   #form-apellido{
     width: 100%;
-    
   }
 
 }
