@@ -1,0 +1,61 @@
+
+.bg-image {
+    filter: brightness(50%);
+ 
+  }
+
+
+  #texto-carrusel{
+    width: 38%;
+    text-align: right;
+
+
+}
+
+.carousel-caption {
+  background-color: none; 
+  padding-bottom: 10rem;
+}
+
+@media (max-width:1024px) {
+  h1{
+    width: 80%;
+    text-align: right;
+  }
+  #texto-carrusel {
+    width: 80%;
+    text-align: right;
+  }
+
+  .carousel-caption{
+    padding-bottom: 30rem;
+  }
+}
+
+
+@media (max-height: 600px) {
+  h1{
+    width: 100%;
+    padding-top: 10rem;
+    text-align: right;
+  }
+
+  .carousel-caption {
+    width: 80%;
+    padding-bottom: 40rem;
+  }
+}
+
+
+@media (max-width: 600px){
+  #form-nombre{
+          width: 100%;
+          margin-bottom: 1rem;
+  }
+
+  #form-apellido{
+    width: 100%;
+    
+  }
+
+}
