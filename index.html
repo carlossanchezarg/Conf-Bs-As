@@ -356,8 +356,6 @@
         function calcularTotal(precio){
           let categ=document.getElementById("catComprador").value;
           let cant=document.getElementById("cantTickets").value;
-          console.log(categ);
-          console.log(cant);
           let total=0;
           if(categ==1){
             total=0.2*precio*cant;    
@@ -369,7 +367,6 @@
             total=200*cant;
           }
           let totalTexto="Total a pagar: $ "+total.toString();
-          console.log(totalTexto);
           document.getElementById("totalApagar").innerHTML = totalTexto;
         }
   
