@@ -257,10 +257,10 @@
         <div id="totalApagar" class="rounded-1 p-3  text-dark bg-opacity-10" style="background-color: lightskyblue;">Total a pagar: $</div>
         
         <div class="col-md-6">
-          <button name="borrar" type="button" onclick="reiniciarCompraTicket()"  class="btn w-100 text-light" style="background-color: #76b339;">Borrar</button>
+          <button name="borrar" type="button" onclick="reiniciarCarrito()"  class="btn w-100 text-light" style="background-color: #76b339;">Borrar</button>
         </div>
         <div class="col-md-6">
-          <button  name="Resumen" type="button" onclick="calcularTotal(200)" class="btn w-100 text-light" style="background-color: #76b339;">Resumen</button>
+          <button  name="Resumen" type="button" onclick="comprarTickets(200)" class="btn w-100 text-light" style="background-color: #76b339;">Resumen</button>
         </div>
       </form>
       <!--end form para comprar ticket-->
@@ -353,31 +353,52 @@
       
 
     <script>
-        function calcularTotal(precio){
+        const descuentos={estudiante:0.2,
+                          trainee: 0.5,
+                          junior: 0.85};
+        let carrito={
+          estudiante:0,
+          trainee:0,
+          junior:0,
+          total:function(precio){
+            return precio*(carrito.estudiante*descuentos.estudiante+carrito.trainee*descuentos.trainee+carrito.junior*descuentos.junior);
+          }
+        }
+
+        function comprarTickets(precio){
           let categ=document.getElementById("catComprador").value;
           let cant=document.getElementById("cantTickets").value;
           let total=0;
           if(categ==1){
-            total=0.2*precio*cant;    
+            carrito.estudiante=cant;
           }else if(categ==2){
-            total=0.5*precio*cant;
+            carrito.trainee=cant;
           }else if(categ==3){
-            total=0.85*precio*cant;
+            carrito.junior=cant;
           }else{
-            total=200*cant;
+            alert("Debe seleccionar una categoria!");
           }
-          let totalTexto="Total a pagar: $ "+total.toString();
-          document.getElementById("totalApagar").innerHTML = totalTexto;
+          mostrarCompra(carrito,precio);
+        }
+
+        function mostrarCompra(carrito,precio){
+          let total=carrito.total(precio);
+          let items=(carrito.estudiante==0?"":"<h6>"+carrito.estudiante.toString()+"x Estudiante/s"+" $"+(200*carrito.estudiante*descuentos.estudiante).toString()+" <del>($"+(200*carrito.estudiante).toString()+")</del> "+(descuentos.estudiante*100-100).toString()+" % OFF </h6>")+
+                    (carrito.trainee==0?"":"<h6>"+carrito.trainee.toString()+"x Trainee/s"+"    $"+(200*carrito.trainee*descuentos.trainee).toString()+" <del>($"+(200*carrito.trainee).toString()+")</del> "+(descuentos.trainee*100-100).toString()+" % OFF </h6>")+
+                    (carrito.junior==0?"":"<h6>"+carrito.junior.toString()+"x Junior/s"+"   $"+(200*carrito.junior*descuentos.junior).toString()+" <del>($"+(200*carrito.junior).toString()+")</del> "+(descuentos.junior*100-100).toString()+" % OFF </h6>");
+          
+          let resumen=items+"<h5>Total a pagar: $ " +(total.toFixed(0)).toString()+"</h5>";
+          document.getElementById("totalApagar").innerHTML = resumen;
         }
   
   
-        function reiniciarCompraTicket(){
+        function reiniciarCarrito(){
           document.getElementById("totalApagar").innerHTML = "Total a pagar: $";
           document.getElementById("cantTickets").value = 1;
           document.getElementById("catComprador").value =1;
-          document.getElementById("nombre").value="";
-          document.getElementById("apellido").value="";
-          document.getElementById("correo").value="";
+          carrito.estudiante=0;
+          carrito.trainee=0;
+          carrito.junior=0;
         }
         
     </script>  
